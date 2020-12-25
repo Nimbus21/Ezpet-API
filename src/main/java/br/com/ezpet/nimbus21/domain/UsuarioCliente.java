@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.ezpet.nimbus21.domain.tipos.TipoUsuario;
@@ -49,10 +52,12 @@ public class UsuarioCliente {
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy="usuarioCliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Mascote> mascotes = new ArrayList<Mascote>();
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy="usuarioCliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Pedido> pedidos = new ArrayList<Pedido>();
 
 	public UsuarioCliente() {

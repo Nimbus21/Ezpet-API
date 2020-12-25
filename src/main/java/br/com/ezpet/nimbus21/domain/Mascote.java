@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -44,6 +47,7 @@ public class Mascote {
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy="mascote", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
 	public List<AmigoMascote> amigosMascote = new ArrayList<AmigoMascote>();
 
 	public Mascote() {
