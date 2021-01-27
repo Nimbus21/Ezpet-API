@@ -1,8 +1,9 @@
 package br.com.ezpet.nimbus21.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,17 +20,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "TB_AMIGO_MASCOTE")
-@SequenceGenerator(name = "amigoMascoteSequence", sequenceName = "SQ_AMIGO_MASCOTE", allocationSize = 1)
-public class AmigoMascote {
-
+@Table(name =  "TB_CONSULTA")
+@SequenceGenerator(name = "consultaSequence", sequenceName = "SQ_CONSULTA", allocationSize = 1)
+public class Consulta {
+	
 	@Id
-	@Column(name = "cd_amigo_mascote")
+	@Column(name = "cd_consulta")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "consultaSequence")
 	private Long codigo;
-
-	@ManyToOne(cascade = { CascadeType.REMOVE})
+	
+	@Column(name = "ds_consulta")
+	private String detalhe;
+	
+	@ManyToOne
 	@JoinColumn(name = "cd_mascote", nullable = false)
-	@JsonBackReference(value="mascote-amigo")
+	@JsonBackReference(value="mascote-consulta")
 	private Mascote mascote;
 
 }

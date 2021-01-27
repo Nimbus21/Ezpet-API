@@ -22,11 +22,13 @@ import org.hibernate.annotations.FetchMode;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table (name = "TB_MASCOTE")
 @SequenceGenerator(name = "mascoteSequence", sequenceName = "SQ_MASCOTE", allocationSize = 1)
@@ -40,24 +42,31 @@ public class Mascote {
 	@Column(name = "nm_mascote")
 	private String nome;
 	
-	@ManyToOne(cascade = { CascadeType.REMOVE })
+	@Column(name = "ft_mascote")
+	private String foto;
+	
+	@ManyToOne
 	@JoinColumn(name = "cd_usuario_cliente", nullable = false)
-	@JsonBackReference
+	@JsonBackReference(value="cliente-mascote")
 	private UsuarioCliente usuarioCliente;
 	
-	@JsonManagedReference
+	@JsonManagedReference(value="mascote-post")
+	@OneToMany(mappedBy="mascote", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Post> posts = new ArrayList<Post>();
+	
+	@JsonManagedReference(value="mascote-amigo")
 	@OneToMany(mappedBy="mascote", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Fetch(value = FetchMode.SUBSELECT)
-	public List<AmigoMascote> amigosMascote = new ArrayList<AmigoMascote>();
-
-	public Mascote() {
-
-	}
+	private List<AmigoMascote> amigosMascote = new ArrayList<AmigoMascote>();
 	
-	public Mascote(Long codigo, String nome, UsuarioCliente usuarioCliente) {
-		this.codigo = codigo;
-		this.nome = nome;
-		this.usuarioCliente = usuarioCliente;
-	}
+	@JsonManagedReference(value="mascote-foto")
+	@OneToMany(mappedBy="mascote", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<Foto> fotos = new ArrayList<Foto>();
+	
+	@JsonManagedReference(value="mascote-consulta")
+	@OneToMany(mappedBy="mascote", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<Consulta> consultas = new ArrayList<Consulta>();
 
 }

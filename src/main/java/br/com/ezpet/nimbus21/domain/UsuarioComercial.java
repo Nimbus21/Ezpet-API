@@ -12,18 +12,25 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.ezpet.nimbus21.domain.tipos.TipoUsuario;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "TB_USUARIO_COMERCIAL")
 @SequenceGenerator(name = "usuarioComercialSequence", sequenceName = "SQ_USUARIO_COMERCIAL", allocationSize = 1)
@@ -35,25 +42,48 @@ public class UsuarioComercial {
 	private Long codigo;
 	
 	@Column(name = "nm_usuario_comercial")
-	private String nome; //Petshop Pedrao
+	private String nome;
+	
+	@Column(name = "nr_cnpj")
+	private String cnpj;
+	
+	@Column(name = "tx_senha")
+	private String senha;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ds_tipo_usuario")
-	private TipoUsuario tipoUsuario; //loja
+	private TipoUsuario tipoUsuario;
 	
-	@JsonManagedReference
+	@Column(name = "ds_horario_funcionamento")
+	private String horarioFuncionamento;
+	
+	@Column(name = "fl_foto")
+	private String foto;
+	
+	@Column(name = "ds_cep")
+	private String cep;
+	
+	@Column(name = "nm_contato")
+	private String nomeContato;
+	
+	@Column(name = "nr_telefone")
+	private String telefone;
+	
+	@Column(name = "ds_email")
+	private String email;
+	
+	@JsonManagedReference(value="comercial-produto")
 	@OneToMany(mappedBy="usuarioComercial", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Produto> produtos = new ArrayList<Produto>(); //Bolinha, boneco, coleira
+	private List<Produto> produtos = new ArrayList<Produto>();
 	
-	public UsuarioComercial() {
-		
-	}
+	@JsonManagedReference(value="comercial-post")
+	@OneToMany(mappedBy="usuarioComercial", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<Post> posts = new ArrayList<Post>();
 	
-	public UsuarioComercial(Long codigo, String nome, TipoUsuario tipoUsuario) {
-		this.codigo = codigo;
-		this.nome = nome;
-		this.tipoUsuario = tipoUsuario;
-	}
+	@OneToOne
+	@JoinColumn(name = "cd_endereco")
+	private Endereco endereco;
 	
 	public void addProduto(Produto produto) {
 		produto.setUsuarioComercial(this);
