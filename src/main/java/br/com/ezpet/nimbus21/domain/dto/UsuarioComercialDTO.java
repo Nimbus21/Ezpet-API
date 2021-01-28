@@ -14,6 +14,7 @@ public class UsuarioComercialDTO {
 	private Long codigo;
 	private String nome;
 	private TipoUsuario tipoUsuario;
+	private String email;
 	private List<Produto> produtos;
 	
 	public UsuarioComercialDTO(UsuarioComercial usuarioComercial) {
@@ -21,6 +22,7 @@ public class UsuarioComercialDTO {
 		this.nome = usuarioComercial.getNome();
 		this.tipoUsuario = usuarioComercial.getTipoUsuario();
 		this.produtos = usuarioComercial.getProdutos();
+		this.email = usuarioComercial.getEmail();
 	}
 	
 	public static List<UsuarioComercialDTO> converter(List<UsuarioComercial> usuariosComercial) {

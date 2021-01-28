@@ -36,6 +36,12 @@ public class UsuarioComercialResource {
 		return UsuarioComercialDTO.converter(usuariosComercial);
 	}
 	
+	@GetMapping("/email/{email}")
+	public ResponseEntity<UsuarioComercialDTO> readEmail(@PathVariable("email") String email){
+		Optional<UsuarioComercial> usuarioComercial = usuarioComercialRepo.findByEmail(email);
+		return usuarioComercial.map(u -> ResponseEntity.ok(new UsuarioComercialDTO(u))).orElse(ResponseEntity.notFound().build());
+	}
+	
 	@GetMapping("{id}")
 	public ResponseEntity<UsuarioComercialDTO> read(@PathVariable("id") Long codigo) {
 		Optional<UsuarioComercial> usuarioComercial = usuarioComercialRepo.findById(codigo);

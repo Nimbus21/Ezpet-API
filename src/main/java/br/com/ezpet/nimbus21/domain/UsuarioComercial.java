@@ -50,7 +50,7 @@ public class UsuarioComercial {
 	@Column(name = "tx_senha")
 	private String senha;
 	
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "ds_tipo_usuario")
 	private TipoUsuario tipoUsuario;
 	
