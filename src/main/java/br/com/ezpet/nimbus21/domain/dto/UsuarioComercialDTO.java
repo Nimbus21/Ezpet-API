@@ -15,6 +15,7 @@ public class UsuarioComercialDTO {
 	private String nome;
 	private TipoUsuario tipoUsuario;
 	private String email;
+	private String senha;
 	private List<Produto> produtos;
 	
 	public UsuarioComercialDTO(UsuarioComercial usuarioComercial) {
@@ -23,6 +24,7 @@ public class UsuarioComercialDTO {
 		this.tipoUsuario = usuarioComercial.getTipoUsuario();
 		this.produtos = usuarioComercial.getProdutos();
 		this.email = usuarioComercial.getEmail();
+		this.senha = usuarioComercial.getSenha();
 	}
 	
 	public static List<UsuarioComercialDTO> converter(List<UsuarioComercial> usuariosComercial) {
