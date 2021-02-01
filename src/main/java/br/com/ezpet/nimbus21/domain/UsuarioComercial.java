@@ -1,6 +1,7 @@
 package br.com.ezpet.nimbus21.domain;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -84,6 +87,16 @@ public class UsuarioComercial {
 	@OneToOne
 	@JoinColumn(name = "cd_endereco")
 	private Endereco endereco;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@Fetch(value = FetchMode.SUBSELECT)
+	@JoinTable(
+			name = "TB_USUARIOS_COMERCIAL_ROLES", 
+			joinColumns = @JoinColumn(
+					name = "cd_usuario_comercial", referencedColumnName = "cd_usuario_comercial"),
+			inverseJoinColumns = @JoinColumn(
+					name = "cd_role", referencedColumnName = "cd_role"))
+	private Collection<Role> roles;
 	
 	public void addProduto(Produto produto) {
 		produto.setUsuarioComercial(this);
