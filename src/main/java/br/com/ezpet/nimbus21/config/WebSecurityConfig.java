@@ -15,7 +15,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 //		http.csrf().disable();
-		http.addFilterAfter(csrfCookieFilter(), CsrfFilter.class);
+//		http.addFilterAfter(csrfCookieFilter(), CsrfFilter.class);
 	}
 	
 	// javax.servlet.Filter;
