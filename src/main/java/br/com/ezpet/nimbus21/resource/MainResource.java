@@ -1,5 +1,7 @@
 package br.com.ezpet.nimbus21.resource;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -10,7 +12,10 @@ public class MainResource {
 
 	@GetMapping("/cookie")
 	@ResponseStatus(code = HttpStatus.OK)
-	public String cookie() {
+	public String cookie(HttpServletResponse response) {
+		
+//		Cookie cookie = new Cookie("")
+//		return "cookie";
 		return "cookie";
 	}
 }
