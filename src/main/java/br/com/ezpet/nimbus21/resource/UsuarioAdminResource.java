@@ -67,7 +67,7 @@ public class UsuarioAdminResource {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<UsuarioAdminDTO> create(@RequestBody @Valid UsuarioAdmin usuarioAdmin, UriComponentsBuilder uriBuilder) {
-		System.out.println("Eu cheguei");
+//		System.out.println("Eu cheguei");
 		usuarioAdminRepo.save(usuarioAdmin);
 		
 		URI uri = uriBuilder.path("/usuarioAdmin/{id}").buildAndExpand(usuarioAdmin.getCodigo()).toUri();

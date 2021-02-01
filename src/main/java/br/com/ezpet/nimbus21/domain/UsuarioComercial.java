@@ -91,7 +91,7 @@ public class UsuarioComercial {
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@Fetch(value = FetchMode.SUBSELECT)
 	@JoinTable(
-			name = "TB_USUARIOS_COMERCIAL_ROLES", 
+			name = "TB_USUARIOS_COMERCIAL_ROLES",
 			joinColumns = @JoinColumn(
 					name = "cd_usuario_comercial", referencedColumnName = "cd_usuario_comercial"),
 			inverseJoinColumns = @JoinColumn(

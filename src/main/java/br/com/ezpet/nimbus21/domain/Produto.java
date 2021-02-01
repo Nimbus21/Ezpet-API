@@ -47,6 +47,9 @@ public class Produto {
 	@Column(name = "ds_preco")
 	private Double preco;
 	
+	@Column(name = "ds_preco_antigo")
+	private Double precoAntigo;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ds_tipo_produto")
 	private TipoProduto tipoProduto;
