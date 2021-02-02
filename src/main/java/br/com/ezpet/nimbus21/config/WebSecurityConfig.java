@@ -20,7 +20,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		//"/index.html", "/", "/home", "/login"
 		
-		http.httpBasic().and().authorizeRequests().antMatchers(HttpMethod.POST, "/usuarioAdmin/**")
+		http
+		.cors().and()//new line for cors
+		.httpBasic().and().authorizeRequests().antMatchers(HttpMethod.POST, "/usuarioAdmin/**")
 		.permitAll()
 		.anyRequest().authenticated().and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 	}
