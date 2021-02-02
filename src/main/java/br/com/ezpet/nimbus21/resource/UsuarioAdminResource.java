@@ -2,6 +2,7 @@ package br.com.ezpet.nimbus21.resource;
 
 import java.net.URI;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -40,6 +41,15 @@ public class UsuarioAdminResource {
 	
 	@Autowired
     private BCryptPasswordEncoder passwordEncoder;
+	
+	@GetMapping
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<UsuarioAdminDTO> readAll() {
+		
+		List<UsuarioAdmin> usuariosAdmin = usuarioAdminRepo.findAll();
+		
+		return UsuarioAdminDTO.converter(usuariosAdmin);
+	}
 	
 	@GetMapping("criadmin")
 	@ResponseStatus(code = HttpStatus.OK)
