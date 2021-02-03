@@ -18,6 +18,7 @@ public class ProdutoDTO {
 	private String nome;
 	private String descricao;
 	private Double preco;
+	private Double precoAntigo;
 	private TipoProduto tipoProduto;
 	private TipoAnimal tipoAnimal;
 	private TipoFisico tipoFisico;
@@ -29,6 +30,7 @@ public class ProdutoDTO {
 		this.nome = produto.getNome();
 		this.descricao = produto.getDescricao();
 		this.preco = produto.getPreco();
+		this.precoAntigo = produto.getPrecoAntigo();
 		this.tipoProduto = produto.getTipoProduto();
 		this.tipoAnimal = produto.getTipoAnimal();
 		this.tipoFisico = produto.getTipoFisico();
