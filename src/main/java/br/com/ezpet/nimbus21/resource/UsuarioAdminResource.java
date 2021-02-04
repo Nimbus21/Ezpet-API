@@ -56,7 +56,7 @@ public class UsuarioAdminResource {
 	public void callAdmin() {
 		
 		UsuarioAdmin thandyAdmin = new UsuarioAdmin("thandy_97@hotmail.com", passwordEncoder.encode("Cycle21"));
-		thandyAdmin.setRoles(Arrays.asList(new Role("ROLE_ADMIN")));
+//		thandyAdmin.setRoles(Arrays.asList(new Role("ROLE_ADMIN")));
 		usuarioAdminRepo.save(thandyAdmin);
 		System.out.println("ThandyAdmin criado");
 	}
