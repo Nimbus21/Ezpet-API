@@ -43,16 +43,6 @@ public class UsuarioAdmin {
 	@Column(name = "tx_senha")
 	private String senha;
 	
-//	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//	@Fetch(value = FetchMode.SUBSELECT)
-//	@JoinTable(
-//			name = "TB_USUARIOS_ADMIN_ROLES", 
-//			joinColumns = @JoinColumn(
-//					name = "cd_usuario_admin", referencedColumnName = "cd_usuario_admin"),
-//			inverseJoinColumns = @JoinColumn(
-//					name = "cd_role", referencedColumnName = "cd_role"))
-//	private Collection<Role> roles;
-	
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "ds_role")
 	private Role role = Role.ROLE_ADMIN;
@@ -61,13 +51,5 @@ public class UsuarioAdmin {
 		this.email = email;
 		this.senha = senha;
 	}
-	
-//	public UsuarioAdmin(String email, String senha, Collection<Role> roles) {
-//		this.email = email;
-//		this.senha = senha;
-//		this.roles = roles;
-//	}
-	
-	
 	
 }
