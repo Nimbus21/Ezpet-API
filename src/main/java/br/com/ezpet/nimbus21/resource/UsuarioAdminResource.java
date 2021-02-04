@@ -1,7 +1,6 @@
 package br.com.ezpet.nimbus21.resource;
 
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.ezpet.nimbus21.domain.Role;
 import br.com.ezpet.nimbus21.domain.UsuarioAdmin;
 import br.com.ezpet.nimbus21.domain.dto.UsuarioAdminDTO;
 import br.com.ezpet.nimbus21.repository.UsuarioAdminRepository;
