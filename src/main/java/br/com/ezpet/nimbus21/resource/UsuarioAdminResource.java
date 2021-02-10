@@ -37,9 +37,6 @@ public class UsuarioAdminResource {
 	@Autowired
 	UsuarioAdminRepository usuarioAdminRepo;
 	
-	@Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-	
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<UsuarioAdminDTO> readAll() {
@@ -49,33 +46,15 @@ public class UsuarioAdminResource {
 		return UsuarioAdminDTO.converter(usuariosAdmin);
 	}
 	
-	@GetMapping("criadmin")
-	@ResponseStatus(code = HttpStatus.OK)
-	public void callAdmin() {
-		
-		UsuarioAdmin thandyAdmin = new UsuarioAdmin("thandy_97@hotmail.com", passwordEncoder.encode("Cycle21"));
-//		thandyAdmin.setRoles(Arrays.asList(new Role("ROLE_ADMIN")));
-		usuarioAdminRepo.save(thandyAdmin);
-		System.out.println("ThandyAdmin criado");
-	}
-	
-//	@GetMapping("/email/{email}")
-//	public ResponseEntity<UsuarioComercialDTO> readEmail(@PathVariable("email") String email){
-//		Optional<UsuarioComercial> usuarioComercial = usuarioComercialRepo.findByEmail(email);
-//		return usuarioComercial.map(u -> ResponseEntity.ok(new UsuarioComercialDTO(u))).orElse(ResponseEntity.notFound().build());
-//	}
-	
 	@GetMapping("/email/{email}")
 	public ResponseEntity<UsuarioAdminDTO> readEmail(@PathVariable("email") String email) {
 		Optional<UsuarioAdmin> usuarioAdmin = usuarioAdminRepo.findByEmail(email);
 		return usuarioAdmin.map(u -> ResponseEntity.ok(new UsuarioAdminDTO(u))).orElse(ResponseEntity.notFound().build());
 	}
 	
-	//working
 	@PostMapping
 	@Transactional
 	public ResponseEntity<UsuarioAdminDTO> create(@RequestBody @Valid UsuarioAdmin usuarioAdmin, UriComponentsBuilder uriBuilder) {
-//		System.out.println("Eu cheguei");
 		usuarioAdminRepo.save(usuarioAdmin);
 		
 		URI uri = uriBuilder.path("/usuarioAdmin/{id}").buildAndExpand(usuarioAdmin.getCodigo()).toUri();

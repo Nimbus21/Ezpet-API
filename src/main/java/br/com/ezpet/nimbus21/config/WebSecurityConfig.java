@@ -13,36 +13,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.csrf().disable();
-//		http.addFilterAfter(csrfCookieFilter(), CsrfFilter.class);
-		
-//		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-		
-		//"/index.html", "/", "/home", "/login"
-		
 		http
-		.cors().and()//new line for cors
+		.cors().and()
 		.httpBasic().and().authorizeRequests().antMatchers(HttpMethod.POST, "/usuarioAdmin/**")
 		.permitAll()
 		.anyRequest().authenticated().and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 	}
-	
-//	private Filter csrfHeaderFilter() {
-//        return new OncePerRequestFilter() {
-//            @Override
-//            protected void doFilterInternal(HttpServletRequest request,
-//                    HttpServletResponse response, FilterChain filterChain)
-//                    throws ServletException, IOException {
-//                CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class
-//                        .getName());
-//                if (csrf != null) {
-//                    Cookie cookie = new Cookie("XSRF-TOKEN", csrf.getToken());
-//                    cookie.setPath("/");
-//                    response.addCookie(cookie);
-//                }
-//                filterChain.doFilter(request, response);
-//            }
-//        };
-//    }
 	
 }

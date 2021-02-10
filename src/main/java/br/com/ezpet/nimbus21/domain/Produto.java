@@ -67,6 +67,7 @@ public class Produto {
 	@JsonBackReference(value="comercial-produto")
 	private UsuarioComercial usuarioComercial;
 	
+	//acho que iremos tirar a bidirecionalidade
 	@ManyToOne(cascade = { CascadeType.REMOVE })
 	@JoinColumn(name = "cd_pedido", nullable = true)
 	@JsonBackReference(value="pedido-produto")
