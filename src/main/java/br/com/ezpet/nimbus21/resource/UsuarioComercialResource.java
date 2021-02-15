@@ -77,6 +77,8 @@ public class UsuarioComercialResource {
 			u.setSenha(usuarioComercialNovo.getSenha());
 			u.setTelefone(usuarioComercialNovo.getTelefone());
 			u.setTipoUsuario(usuarioComercialNovo.getTipoUsuario());
+			u.setAbertura(usuarioComercialNovo.getAbertura());
+			u.setFechamento(usuarioComercialNovo.getFechamento());
 			usuarioComercialRepo.save(u);
 			return ResponseEntity.ok(new UsuarioComercialDTO(u));
 		}).orElse(ResponseEntity.notFound().build());
