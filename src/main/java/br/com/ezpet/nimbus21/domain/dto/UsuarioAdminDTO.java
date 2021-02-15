@@ -11,12 +11,14 @@ import lombok.Getter;
 public class UsuarioAdminDTO {
 
 	private Long codigo;
+	private String nome;
 	private String email;
 	private String senha;
 	private Role role = Role.ROLE_ADMIN;
 
 	public UsuarioAdminDTO(UsuarioAdmin usuarioAdmin) {
 		this.codigo = usuarioAdmin.getCodigo();
+		this.nome = usuarioAdmin.getNome();
 		this.email = usuarioAdmin.getEmail();
 		this.senha = usuarioAdmin.getSenha();
 		this.role = usuarioAdmin.getRole();

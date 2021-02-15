@@ -1,29 +1,18 @@
 package br.com.ezpet.nimbus21.domain;
 
-import java.util.Collection;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
+import br.com.ezpet.nimbus21.domain.tipos.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import br.com.ezpet.nimbus21.domain.tipos.Role;
 
 @Data
 @NoArgsConstructor
@@ -37,6 +26,9 @@ public class UsuarioAdmin {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuarioAdminSequence")
 	private Long codigo;
 	
+	@Column(name = "nm_usuario_admin")
+	private String nome;
+	
 	@Column(name = "ds_email")
 	private String email;
 	
@@ -47,7 +39,8 @@ public class UsuarioAdmin {
 	@Column(name = "ds_role")
 	private Role role = Role.ROLE_ADMIN;
 
-	public UsuarioAdmin(String email, String senha) {
+	public UsuarioAdmin(String nome, String email, String senha) {
+		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 	}

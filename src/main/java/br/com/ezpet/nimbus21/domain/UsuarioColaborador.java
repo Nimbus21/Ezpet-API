@@ -26,6 +26,9 @@ public class UsuarioColaborador {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuarioColabSequence")
 	private Long codigo;
 	
+	@Column(name = "nm_usuario_colab")
+	private String nome;
+	
 	@Column(name = "ds_email")
 	private String email;
 	
@@ -36,7 +39,8 @@ public class UsuarioColaborador {
 	@Column(name = "ds_role")
 	private Role role = Role.ROLE_COLAB;
 
-	public UsuarioColaborador(String email, String senha) {
+	public UsuarioColaborador(String nome, String email, String senha) {
+		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 	}
