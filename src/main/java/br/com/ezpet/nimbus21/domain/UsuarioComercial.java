@@ -23,6 +23,7 @@ import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import br.com.ezpet.nimbus21.domain.tipos.Role;
 import br.com.ezpet.nimbus21.domain.tipos.TipoUsuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -77,6 +78,10 @@ public class UsuarioComercial {
 	
 	@Column(name = "hr_fechamento")
 	private String fechamento;
+	
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "ds_role")
+	private Role role;
 	
 	@JsonManagedReference(value="comercial-produto")
 	@OneToMany(mappedBy="usuarioComercial", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
