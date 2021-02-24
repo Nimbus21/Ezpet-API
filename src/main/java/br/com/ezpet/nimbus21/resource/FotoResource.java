@@ -8,6 +8,7 @@ import java.util.zip.Inflater;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,11 +45,18 @@ public class FotoResource {
 		return ResponseEntity.status(HttpStatus.OK);
 	}
 	
-	@GetMapping("/get/{nome}")
-	public Foto getFoto(@PathVariable("nome") String nome) throws IOException {
+//	@GetMapping(value = "/get/{nome}", produces = MediaType.IMAGE_JPEG_VALUE)
+//	public Foto getFoto(@PathVariable("nome") String nome) throws IOException {
+//		final Optional<Foto> retrievedImage = fotoRepo.findByNome(nome);
+//		Foto foto = new Foto(retrievedImage.get().getNome(), retrievedImage.get().getTipo(), decompressBytes(retrievedImage.get().getFotoByte()));
+//		return foto;
+//	}
+	
+	@GetMapping(value = "/get/{nome}", produces = MediaType.IMAGE_JPEG_VALUE)
+	public byte[] getFoto(@PathVariable("nome") String nome) throws IOException {
 		final Optional<Foto> retrievedImage = fotoRepo.findByNome(nome);
 		Foto foto = new Foto(retrievedImage.get().getNome(), retrievedImage.get().getTipo(), decompressBytes(retrievedImage.get().getFotoByte()));
-		return foto;
+		return foto.getFotoByte();
 	}
 	
 	public static byte[] compressBytes(byte[] data) {
