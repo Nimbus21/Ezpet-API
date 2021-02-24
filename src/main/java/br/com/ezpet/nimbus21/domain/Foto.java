@@ -54,12 +54,17 @@ public class Foto {
 	@JsonBackReference(value="mascote-foto")
 	private Mascote mascote;
 
-	public Foto(String nomeOriginal, String novoNome, String tipo, byte[] fotoByte) {
+	public Foto(String nomeOriginal, String novoNome, String tipo, byte[] fotoByte, String link) {
 		this.nomeOriginal = nomeOriginal;
 		this.novoNome = novoNome;
 		this.tipo = tipo;
 		this.fotoByte = fotoByte;
+		this.link = link;
 	}
 	
+	public Foto(String tipo, byte[] fotoByte) {
+		this.tipo = tipo;
+		this.fotoByte = fotoByte;
+	}
 	
 }
