@@ -12,7 +12,8 @@ import lombok.Getter;
 public class FotoDTO {
 
 	private Long codigo;
-	private String nome;
+	private String nomeOriginal;
+	private String novoNome;
 	private String link;
 	private byte[] fotoByte;
 	private UsuarioCliente usuarioCliente;
@@ -20,7 +21,8 @@ public class FotoDTO {
 	
 	public FotoDTO(Foto foto) {
 		this.codigo = foto.getCodigo();
-		this.nome = foto.getNome();
+		this.nomeOriginal = foto.getNomeOriginal();
+		this.novoNome = foto.getNovoNome();
 		this.link = foto.getLink();
 		this.fotoByte = foto.getFotoByte();
 		this.usuarioCliente = foto.getUsuarioCliente();

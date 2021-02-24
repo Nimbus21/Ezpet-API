@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import br.com.ezpet.nimbus21.domain.Foto;
 
 public interface FotoRepository extends JpaRepository<Foto, Long>{
-	Optional<Foto> findByNome(String nome);
+	Optional<Foto> findByNomeOriginal(String nome);
+	Optional<Foto> findByNovoNome(String nome);
 }

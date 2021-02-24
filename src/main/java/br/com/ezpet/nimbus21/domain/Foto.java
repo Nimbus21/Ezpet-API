@@ -28,8 +28,11 @@ public class Foto {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fotoSequence")
 	private Long codigo;
 	
+	@Column(name = "nm_foto_original")
+	private String nomeOriginal;
+	
 	@Column(name = "nm_foto")
-	private String nome;
+	private String novoNome;
 	
 	@Column(name = "vl_foto")
 	private String link;
@@ -51,8 +54,9 @@ public class Foto {
 	@JsonBackReference(value="mascote-foto")
 	private Mascote mascote;
 
-	public Foto(String nome, String tipo, byte[] fotoByte) {
-		this.nome = nome;
+	public Foto(String nomeOriginal, String novoNome, String tipo, byte[] fotoByte) {
+		this.nomeOriginal = nomeOriginal;
+		this.novoNome = novoNome;
 		this.tipo = tipo;
 		this.fotoByte = fotoByte;
 	}

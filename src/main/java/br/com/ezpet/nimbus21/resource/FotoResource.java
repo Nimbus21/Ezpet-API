@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
@@ -36,10 +37,12 @@ public class FotoResource {
 	public ResponseEntity<FotoDTO> uploadFoto(@RequestParam("imageFile") MultipartFile file, UriComponentsBuilder uriBuilder) throws IOException{
 		
 		System.out.println("Tamanho de bytes " + file.getBytes().length);
-		Foto foto = new Foto(file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
+		String nome = String.format("%s.%s", UUID.randomUUID().toString());
+		Foto foto = new Foto(file.getOriginalFilename(), nome, file.getContentType(), compressBytes(file.getBytes()));
+		System.out.println("Foto em string: " + foto.toString());
 		fotoRepo.save(foto);
 		
-		URI uri = uriBuilder.path("/get/{nome}").buildAndExpand(foto.getNome()).toUri();
+		URI uri = uriBuilder.path("/get/{nome}").buildAndExpand(foto.getNomeOriginal()).toUri();
 		
 		return ResponseEntity.created(uri).body(new FotoDTO(foto));
 	}
@@ -53,8 +56,8 @@ public class FotoResource {
 	
 	@GetMapping(value = "/get/{nome}", produces = MediaType.IMAGE_JPEG_VALUE)
 	public byte[] getFoto(@PathVariable("nome") String nome) throws IOException {
-		final Optional<Foto> retrievedImage = fotoRepo.findByNome(nome);
-		Foto foto = new Foto(retrievedImage.get().getNome(), retrievedImage.get().getTipo(), decompressBytes(retrievedImage.get().getFotoByte()));
+		final Optional<Foto> retrievedImage = fotoRepo.findByNomeOriginal(nome);
+		Foto foto = new Foto(retrievedImage.get().getNomeOriginal(), retrievedImage.get().getNovoNome(), retrievedImage.get().getTipo(), decompressBytes(retrievedImage.get().getFotoByte()));
 		return foto.getFotoByte();
 	}
 	
