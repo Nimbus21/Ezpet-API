@@ -34,9 +34,9 @@ public class FotoResource {
 	
 	@PostMapping("/upload")
 	@Transactional
-	public ResponseEntity<FotoDTO> uploadFoto(@RequestParam("imageFile") MultipartFile file, UriComponentsBuilder uriBuilder) throws IOException{
+	public String uploadFoto(@RequestParam("imageFile") MultipartFile file, UriComponentsBuilder uriBuilder) throws IOException{
 		
-		System.out.println("Tamanho de bytes " + file.getBytes().length);
+//		System.out.println("Tamanho de bytes " + file.getBytes().length);
 		String nome = UUID.randomUUID().toString() + "." + file.getOriginalFilename().split("\\.")[1];
 		String link = "https://ezpet-api.herokuapp.com/foto/get/" + nome;
 		Foto foto = new Foto(
@@ -45,20 +45,13 @@ public class FotoResource {
 				compressBytes(file.getBytes()),
 				link
 		);
-		System.out.println("Foto em string: " + foto.toString());
+//		System.out.println("Foto em string: " + foto.toString());
 		fotoRepo.save(foto);
 		
-		URI uri = uriBuilder.path("/get/{nome}").buildAndExpand(foto.getNomeOriginal()).toUri();
+//		URI uri = uriBuilder.path("/get/{nome}").buildAndExpand(foto.getNomeOriginal()).toUri();
 		
-		return ResponseEntity.created(uri).body(new FotoDTO(foto));
+		return foto.getLink();
 	}
-	
-//	@GetMapping(value = "/get/{nome}", produces = MediaType.IMAGE_JPEG_VALUE)
-//	public Foto getFoto(@PathVariable("nome") String nome) throws IOException {
-//		final Optional<Foto> retrievedImage = fotoRepo.findByNome(nome);
-//		Foto foto = new Foto(retrievedImage.get().getNome(), retrievedImage.get().getTipo(), decompressBytes(retrievedImage.get().getFotoByte()));
-//		return foto;
-//	}
 	
 	@GetMapping(value = "/get/{nome}", produces = MediaType.IMAGE_JPEG_VALUE)
 	public byte[] getFoto(@PathVariable("nome") String nome) throws IOException {
@@ -86,7 +79,7 @@ public class FotoResource {
 			
 		}
 		
-		System.out.println("Tamanho da imagem comprimida " + outputStream.toByteArray().length);
+//		System.out.println("Tamanho da imagem comprimida " + outputStream.toByteArray().length);
 		return outputStream.toByteArray();
 	}
 	
