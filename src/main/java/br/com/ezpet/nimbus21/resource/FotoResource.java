@@ -31,13 +31,14 @@ public class FotoResource {
 	FotoRepository fotoRepo;
 	
 	@PostMapping("/upload")
-	@ResponseStatus(HttpStatus.ACCEPTED)
 	public BodyBuilder uploadFoto(@RequestParam("imageFile") MultipartFile file){
 		
 		try {
 			System.out.println("Tamanho de bytes " + file.getBytes().length);
 			Foto foto = new Foto(file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
 			fotoRepo.save(foto);
+			
+			return ResponseEntity.status(HttpStatus.ACCEPTED);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
