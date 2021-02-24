@@ -2,25 +2,26 @@ package br.com.ezpet.nimbus21.resource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.util.Optional;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.ResponseEntity.BodyBuilder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.ezpet.nimbus21.domain.Foto;
+import br.com.ezpet.nimbus21.domain.dto.FotoDTO;
 import br.com.ezpet.nimbus21.repository.FotoRepository;
 
 @RestController
@@ -31,14 +32,16 @@ public class FotoResource {
 	FotoRepository fotoRepo;
 	
 	@PostMapping("/upload")
-	@ResponseBody
-	public BodyBuilder uploadFoto(@RequestParam("imageFile") MultipartFile file) throws IOException{
+	@Transactional
+	public ResponseEntity<FotoDTO> uploadFoto(@RequestParam("imageFile") MultipartFile file, UriComponentsBuilder uriBuilder) throws IOException{
 		
 		System.out.println("Tamanho de bytes " + file.getBytes().length);
 		Foto foto = new Foto(file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
 		fotoRepo.save(foto);
 		
-		return ResponseEntity.status(HttpStatus.OK);
+		URI uri = uriBuilder.path("/get/{nome}").buildAndExpand(foto.getNome()).toUri();
+		
+		return ResponseEntity.created(uri).body(new FotoDTO(foto));
 	}
 	
 //	@GetMapping(value = "/get/{nome}", produces = MediaType.IMAGE_JPEG_VALUE)
