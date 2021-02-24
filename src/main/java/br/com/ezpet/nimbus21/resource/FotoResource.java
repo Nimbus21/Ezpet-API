@@ -37,7 +37,7 @@ public class FotoResource {
 	public ResponseEntity<FotoDTO> uploadFoto(@RequestParam("imageFile") MultipartFile file, UriComponentsBuilder uriBuilder) throws IOException{
 		
 		System.out.println("Tamanho de bytes " + file.getBytes().length);
-		String nome = UUID.randomUUID().toString();
+		String nome = UUID.randomUUID().toString() + file.getOriginalFilename().split("\\.")[1];
 		Foto foto = new Foto(file.getOriginalFilename(), nome, file.getContentType(), compressBytes(file.getBytes()));
 		System.out.println("Foto em string: " + foto.toString());
 		fotoRepo.save(foto);
