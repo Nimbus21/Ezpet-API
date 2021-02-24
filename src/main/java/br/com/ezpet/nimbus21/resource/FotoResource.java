@@ -32,17 +32,11 @@ public class FotoResource {
 	
 	@PostMapping("/upload")
 	@ResponseBody
-	public BodyBuilder uploadFoto(@RequestParam("imageFile") MultipartFile file){
+	public BodyBuilder uploadFoto(@RequestParam("imageFile") MultipartFile file) throws IOException{
 		
-		try {
-			System.out.println("Tamanho de bytes " + file.getBytes().length);
-			Foto foto = new Foto(file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
-			fotoRepo.save(foto);
-			
-//			return ResponseEntity.status(HttpStatus.ACCEPTED);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		System.out.println("Tamanho de bytes " + file.getBytes().length);
+		Foto foto = new Foto(file.getOriginalFilename(), file.getContentType(), compressBytes(file.getBytes()));
+		fotoRepo.save(foto);
 		
 		return ResponseEntity.status(HttpStatus.OK);
 	}
