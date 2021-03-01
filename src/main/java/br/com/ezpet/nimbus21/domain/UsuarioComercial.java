@@ -96,6 +96,10 @@ public class UsuarioComercial {
 	@JoinColumn(name = "cd_endereco")
 	private Endereco endereco;
 	
+	public UsuarioComercial(String nome) {
+		this.nome = nome;
+	}
+	
 	public void addProduto(Produto produto) {
 		produto.setUsuarioComercial(this);
 		produtos.add(produto);

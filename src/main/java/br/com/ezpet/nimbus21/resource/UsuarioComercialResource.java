@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -46,6 +51,66 @@ public class UsuarioComercialResource {
 	public ResponseEntity<UsuarioComercialDTO> read(@PathVariable("id") Long codigo) {
 		Optional<UsuarioComercial> usuarioComercial = usuarioComercialRepo.findById(codigo);
 		return usuarioComercial.map(u -> ResponseEntity.ok(new UsuarioComercialDTO(u))).orElse(ResponseEntity.notFound().build());
+	}
+	
+	@GetMapping("popular")
+	public ResponseEntity<UsuarioComercialDTO> popula(UriComponentsBuilder uriBuilder) {
+		
+		
+		UsuarioComercial usu = new UsuarioComercial("A");
+		usuarioComercialRepo.save(usu);
+		
+		UsuarioComercial usu2 = new UsuarioComercial("A");
+		usuarioComercialRepo.save(usu2);
+		
+		UsuarioComercial usu3 = new UsuarioComercial("A");
+		usuarioComercialRepo.save(usu3);
+		
+		UsuarioComercial usu4 = new UsuarioComercial("A");
+		usuarioComercialRepo.save(usu4);
+
+		UsuarioComercial usu5 = new UsuarioComercial("A");
+		usuarioComercialRepo.save(usu5);
+		
+		UsuarioComercial usu6 = new UsuarioComercial("A");
+		usuarioComercialRepo.save(usu6);
+		
+		UsuarioComercial usu7 = new UsuarioComercial("A");
+		usuarioComercialRepo.save(usu7);
+		
+		UsuarioComercial usu8 = new UsuarioComercial("A");
+		usuarioComercialRepo.save(usu8);
+		
+		URI uri = uriBuilder.path("/usuarioComercial/{id}").buildAndExpand(usu.getCodigo()).toUri();
+		return ResponseEntity.created(uri).body(new UsuarioComercialDTO(usu));
+	}
+	
+//	@GetMapping("search")
+//	public Page<UsuarioComercial> search(
+//			@RequestParam("searchTerm") String searchTerm, 
+//			@RequestParam (value = "page", required = false, defaultValue = "0") int page, 
+//			@RequestParam (value = "size", required = false, defaultValue = "5") int size) {
+//		PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC,"nome");
+//		return usuarioComercialRepo.search(searchTerm.toLowerCase(), pageRequest);
+//	}
+	
+//	@GetMapping("searchh")
+//	public Page<UsuarioComercial> findAll() {
+//		int page = 0;
+//		int size = 5;
+//		PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "nome");
+//		
+//		return new PageImpl<>(usuarioComercialRepo.findAll(), pageRequest, size);
+//	}
+	
+	@GetMapping("all")
+	@ResponseStatus(code = HttpStatus.OK)
+	public List<UsuarioComercialDTO> novoFindAll(@RequestParam("page") int page) {
+		int size = 5;
+		Pageable pageRequest = PageRequest.of(page, size);
+		Page<UsuarioComercial> allPage = usuarioComercialRepo.findAll(pageRequest);
+		List<UsuarioComercial> allList = allPage.getContent();
+		return UsuarioComercialDTO.converter(allList);
 	}
 	
 	@PostMapping
