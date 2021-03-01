@@ -17,6 +17,7 @@ public class UsuarioComercialDTO {
 	private TipoUsuario tipoUsuario;
 	private String email;
 	private String senha;
+	private String foto;
 	private String abertura;
 	private String fechamento;
 	private Role role;
@@ -29,6 +30,7 @@ public class UsuarioComercialDTO {
 		this.produtos = usuarioComercial.getProdutos();
 		this.email = usuarioComercial.getEmail();
 		this.senha = usuarioComercial.getSenha();
+		this.foto = usuarioComercial.getFoto();
 		this.abertura = usuarioComercial.getAbertura();
 		this.fechamento = usuarioComercial.getFechamento();
 		this.role = usuarioComercial.getRole();
