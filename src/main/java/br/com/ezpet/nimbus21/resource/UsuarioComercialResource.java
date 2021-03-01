@@ -106,7 +106,7 @@ public class UsuarioComercialResource {
 	@GetMapping("all")
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<UsuarioComercialDTO> novoFindAll(@RequestParam("page") int page) {
-		int size = 5;
+		int size = 8;
 		Pageable pageRequest = PageRequest.of(page, size);
 		Page<UsuarioComercial> allPage = usuarioComercialRepo.findAll(pageRequest);
 		List<UsuarioComercial> allList = allPage.getContent();
