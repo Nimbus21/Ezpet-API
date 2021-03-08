@@ -67,8 +67,9 @@ public class ProdutoResource {
 			p.setFoto(produtoNovo.getFoto());
 			p.setNome(produtoNovo.getNome());
 			p.setPreco(produtoNovo.getPreco());
-			p.setTipoAnimal(produtoNovo.getTipoAnimal());
-			p.setTipoFisico(produtoNovo.getTipoFisico());
+			p.setSubcategoria(produtoNovo.getSubcategoria());
+//			p.setTipoAnimal(produtoNovo.getTipoAnimal());
+//			p.setTipoFisico(produtoNovo.getTipoFisico());
 			p.setTipoProduto(produtoNovo.getTipoProduto());
 			p.setUsuarioComercial(produtoNovo.getUsuarioComercial());
 			produtoRepo.save(p);

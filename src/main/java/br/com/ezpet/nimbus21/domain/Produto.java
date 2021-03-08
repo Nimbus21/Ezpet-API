@@ -15,8 +15,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import br.com.ezpet.nimbus21.domain.tipos.TipoAnimal;
-import br.com.ezpet.nimbus21.domain.tipos.TipoFisico;
 import br.com.ezpet.nimbus21.domain.tipos.TipoProduto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -54,13 +52,19 @@ public class Produto {
 	@Column(name = "ds_tipo_produto")
 	private TipoProduto tipoProduto;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "ds_tipo_animal")
-	private TipoAnimal tipoAnimal;
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "ds_tipo_animal")
+//	private TipoAnimal tipoAnimal;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "ds_tipo_fisico")
-	private TipoFisico tipoFisico;
+	@ManyToOne(cascade = { CascadeType.REMOVE })
+	@JoinColumn(name = "cd_subcategoria", nullable = false)
+	@JsonBackReference(value = "subcategoria-produto")
+	private Subcategoria subcategoria;
+	
+	@ManyToOne(cascade = { CascadeType.REMOVE })
+	@JoinColumn(name = "cd_marca", nullable = false)
+	@JsonBackReference(value = "marca-produto")
+	private Marca marca;
 	
 	@ManyToOne(cascade = { CascadeType.REMOVE })
 	@JoinColumn(name = "cd_usuario_comercial", nullable = false)

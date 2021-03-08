@@ -34,7 +34,6 @@ public class UsuarioClienteResource {
 	@Autowired
 	UsuarioClienteRepository usuarioClienteRepo;
 	
-	//working
 	@GetMapping
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<UsuarioClienteDTO> readAll(String nome) {
@@ -44,7 +43,6 @@ public class UsuarioClienteResource {
 		return UsuarioClienteDTO.converter(usuarioClientes);
 	}
 	
-	//working
 	@GetMapping("{id}")
 	public ResponseEntity<UsuarioClienteDTO> read(@PathVariable("id") Long codigo) {
 		Optional<UsuarioCliente> usuarioCliente = usuarioClienteRepo.findById(codigo);
@@ -57,7 +55,6 @@ public class UsuarioClienteResource {
 		return usuarioCliente.map(u -> ResponseEntity.ok(new UsuarioClienteDTO(u))).orElse(ResponseEntity.notFound().build());
 	}
 	
-	//working
 	@PostMapping
 	@Transactional
 	public ResponseEntity<UsuarioClienteDTO> create(@RequestBody @Valid UsuarioCliente usuarioCliente, UriComponentsBuilder uriBuilder) {
@@ -67,7 +64,6 @@ public class UsuarioClienteResource {
 		return ResponseEntity.created(uri).body(new UsuarioClienteDTO(usuarioCliente));
 	}
 	
-	//working
 	@PutMapping("{id}")
 	@Transactional
 	public ResponseEntity<UsuarioClienteDTO> update(@PathVariable("id") Long codigo, @RequestBody @Valid UsuarioCliente usuarioClienteNovo) {
@@ -90,7 +86,6 @@ public class UsuarioClienteResource {
 		}).orElse(ResponseEntity.notFound().build());
 	}
 	
-	//working
 	@PatchMapping("{id}")
 	@Transactional
 	public ResponseEntity<UsuarioClienteDTO> updateSenha(@PathVariable("id") Long codigo, @RequestBody Map<String, String> senha) {

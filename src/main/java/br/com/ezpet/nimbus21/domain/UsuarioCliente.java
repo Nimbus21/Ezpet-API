@@ -51,7 +51,6 @@ public class UsuarioCliente {
 	@Column(name = "ds_localizacao_cliente")
 	private String localizacao;
 	
-//	@Enumerated(EnumType.STRING)
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "ds_tipo_usuario")
 	private TipoUsuario tipoUsuario = TipoUsuario.MASCOTE;

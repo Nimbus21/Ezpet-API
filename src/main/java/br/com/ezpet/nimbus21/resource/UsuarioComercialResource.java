@@ -53,56 +53,6 @@ public class UsuarioComercialResource {
 		return usuarioComercial.map(u -> ResponseEntity.ok(new UsuarioComercialDTO(u))).orElse(ResponseEntity.notFound().build());
 	}
 	
-	@GetMapping("popular")
-	public ResponseEntity<UsuarioComercialDTO> popula(UriComponentsBuilder uriBuilder) {
-		
-		
-		UsuarioComercial usu = new UsuarioComercial("A");
-		usuarioComercialRepo.save(usu);
-		
-		UsuarioComercial usu2 = new UsuarioComercial("A");
-		usuarioComercialRepo.save(usu2);
-		
-		UsuarioComercial usu3 = new UsuarioComercial("A");
-		usuarioComercialRepo.save(usu3);
-		
-		UsuarioComercial usu4 = new UsuarioComercial("A");
-		usuarioComercialRepo.save(usu4);
-
-		UsuarioComercial usu5 = new UsuarioComercial("A");
-		usuarioComercialRepo.save(usu5);
-		
-		UsuarioComercial usu6 = new UsuarioComercial("A");
-		usuarioComercialRepo.save(usu6);
-		
-		UsuarioComercial usu7 = new UsuarioComercial("A");
-		usuarioComercialRepo.save(usu7);
-		
-		UsuarioComercial usu8 = new UsuarioComercial("A");
-		usuarioComercialRepo.save(usu8);
-		
-		URI uri = uriBuilder.path("/usuarioComercial/{id}").buildAndExpand(usu.getCodigo()).toUri();
-		return ResponseEntity.created(uri).body(new UsuarioComercialDTO(usu));
-	}
-	
-//	@GetMapping("search")
-//	public Page<UsuarioComercial> search(
-//			@RequestParam("searchTerm") String searchTerm, 
-//			@RequestParam (value = "page", required = false, defaultValue = "0") int page, 
-//			@RequestParam (value = "size", required = false, defaultValue = "5") int size) {
-//		PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC,"nome");
-//		return usuarioComercialRepo.search(searchTerm.toLowerCase(), pageRequest);
-//	}
-	
-//	@GetMapping("searchh")
-//	public Page<UsuarioComercial> findAll() {
-//		int page = 0;
-//		int size = 5;
-//		PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "nome");
-//		
-//		return new PageImpl<>(usuarioComercialRepo.findAll(), pageRequest, size);
-//	}
-	
 	@GetMapping("all")
 	@ResponseStatus(code = HttpStatus.OK)
 	public List<UsuarioComercialDTO> novoFindAll(@RequestParam("page") int page) {
