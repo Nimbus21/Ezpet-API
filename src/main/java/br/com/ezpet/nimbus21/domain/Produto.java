@@ -42,6 +42,9 @@ public class Produto {
 	@Column(name = "ds_produto")
 	private String descricao;
 	
+	@Column(name = "ds_especificacao")
+	private String especificacao;
+	
 	@Column(name = "ds_preco")
 	private Double preco;
 	
@@ -51,10 +54,6 @@ public class Produto {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ds_tipo_produto")
 	private TipoProduto tipoProduto;
-	
-//	@Enumerated(EnumType.STRING)
-//	@Column(name = "ds_tipo_animal")
-//	private TipoAnimal tipoAnimal;
 	
 	@ManyToOne(cascade = { CascadeType.REMOVE })
 	@JoinColumn(name = "cd_subcategoria", nullable = false)
@@ -71,7 +70,6 @@ public class Produto {
 	@JsonBackReference(value="comercial-produto")
 	private UsuarioComercial usuarioComercial;
 	
-	//acho que iremos tirar a bidirecionalidade
 	@ManyToOne(cascade = { CascadeType.REMOVE })
 	@JoinColumn(name = "cd_pedido", nullable = true)
 	@JsonBackReference(value="pedido-produto")

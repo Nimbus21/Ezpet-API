@@ -64,6 +64,7 @@ public class ProdutoResource {
 		
 		return produto.map(p -> {
 			p.setDescricao(produtoNovo.getDescricao());
+			p.setEspecificacao(produtoNovo.getEspecificacao());
 			p.setFoto(produtoNovo.getFoto());
 			p.setNome(produtoNovo.getNome());
 			p.setPreco(produtoNovo.getPreco());
@@ -72,6 +73,9 @@ public class ProdutoResource {
 //			p.setTipoFisico(produtoNovo.getTipoFisico());
 			p.setTipoProduto(produtoNovo.getTipoProduto());
 			p.setUsuarioComercial(produtoNovo.getUsuarioComercial());
+			p.setMarca(produtoNovo.getMarca());
+			p.setPrecoAntigo(produtoNovo.getPrecoAntigo());
+			p.setSubcategoria(produtoNovo.getSubcategoria());
 			produtoRepo.save(p);
 			return ResponseEntity.ok(new ProdutoDTO(p));
 		}).orElse(ResponseEntity.notFound().build());

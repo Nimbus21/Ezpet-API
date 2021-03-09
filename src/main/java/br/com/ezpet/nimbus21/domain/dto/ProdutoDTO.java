@@ -18,15 +18,11 @@ public class ProdutoDTO {
 	private String foto;
 	private String nome;
 	private String descricao;
+	private String especificacao;
 	private Double preco;
 	private Double precoAntigo;
 	private TipoProduto tipoProduto;
-	
 	private Subcategoria subcategoria;
-	
-	private TipoAnimal tipoAnimal;
-	private TipoFisico tipoFisico;
-	
 	private UsuarioComercial usuarioComercial;
 
 	public ProdutoDTO(Produto produto) {
@@ -34,15 +30,11 @@ public class ProdutoDTO {
 		this.foto = produto.getFoto();
 		this.nome = produto.getNome();
 		this.descricao = produto.getDescricao();
+		this.especificacao = produto.getEspecificacao();
 		this.preco = produto.getPreco();
 		this.precoAntigo = produto.getPrecoAntigo();
 		this.tipoProduto = produto.getTipoProduto();
-		
 		this.subcategoria = produto.getSubcategoria();
-		
-//		this.tipoAnimal = produto.getTipoAnimal();
-//		this.tipoFisico = produto.getTipoFisico();
-		
 		this.usuarioComercial = produto.getUsuarioComercial();
 	}
 	

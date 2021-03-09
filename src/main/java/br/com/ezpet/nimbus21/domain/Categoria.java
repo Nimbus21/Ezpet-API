@@ -6,8 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +19,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import br.com.ezpet.nimbus21.domain.tipos.TipoFisico;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,10 +44,6 @@ public class Categoria {
 	
 	@Column(name = "st_ativo")
 	private Boolean ativo;
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "ds_tipo_fisico")
-	private TipoFisico tipoFisico;
 	
 	@ManyToOne(cascade = { CascadeType.REMOVE })
 	@JoinColumn(name = "cd_especie", nullable = false)

@@ -23,9 +23,5 @@ public class MascoteDTO {
 	public static List<MascoteDTO> converter(List<Mascote> mascotes) {
 		return mascotes.stream().map(MascoteDTO::new).collect(Collectors.toList());
 	}
-	
-//	public static List<HospitalDTO> converter (List<Hospital> hospitais) {
-//		return hospitais.stream().map(HospitalDTO::new).collect(Collectors.toList());
-//	}
 
 }
